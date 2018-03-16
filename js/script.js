@@ -1,5 +1,4 @@
 
-//Still working on it
 
 !function () {
   //sending the ajax request and displaying 12 employees on the page with the data provided from the api
@@ -19,15 +18,16 @@
 
       }
       $('li').click(function(event) {
+        //creating a blur background effect
         $('.wrapper').css('filter','blur(4px)')
                      .css(' webkit-filter','blur(4px)');
+
 
         const $overlay = $(`
           <div class="overlay">
             <div class="lightbox">
               <button id="previous"><</button>
               <button id="next">></button>
-              <button id="close">x</button>
               <div class="main-info">
                 <img class="thumbnail2">
                 <h4 class="name2"></h4>
@@ -44,7 +44,7 @@
           </div>
           `);
         $('.container').append($overlay);
-        // basic details in modal window
+        //  details in overlay window
         let employeeOverlay = data.results[this.id];
         $('.thumbnail2').attr('src',  employeeOverlay.picture.large);
         $('.name2').html( employeeOverlay.name.first.substring(0,1).toUpperCase() + employeeOverlay.name.first.substring(1)  +
@@ -57,14 +57,32 @@
         $('.birthday').html('Birthday: ' + employeeOverlay.dob.slice(0, 11));
         $('.username2').html('Username: ' + employeeOverlay.login.username);
 
-        $('#close').on('click', function() {
+        let employeeId = this.id;
+        //BUTTONS
+        // hide and show buttons when needed
+        if (parseInt(employeeId) == 0) {
+          $('#previous').hide()
+        }
+        else if (parseInt(employeeId) == 11) {
+          $('#next').hide();
+        }
+        $('#next').click(function () {
           $overlay.remove();
-          $('.wrapper').css('filter','none')
-                       .css(' webkit-filter','none');
+          $('li')[parseInt(employeeId)+1].click();
         })
-
-
-     });
-    }
-    });
+        $('#previous').click(function () {
+          $overlay.remove();
+          $('li')[parseInt(employeeId)-1].click();
+        })
+        //removing the overlay and the blur effect when any other area on the screen , except the overlay  is clicked
+        $overlay.click((event) => {
+          if (event.target.className == 'overlay') {
+            $overlay.remove();
+            $('.wrapper').css('filter','none')
+                         .css(' webkit-filter','none');
+          }
+        })
+      });//end click
+    }//end success
+  });//end ajax
 }();
