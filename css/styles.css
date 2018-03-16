@@ -1,4 +1,6 @@
-* { font-family: Lato, sans-serif; }
+* {
+  font-family: Lato, sans-serif;
+ }
 
 body { margin: 0;
 background-color: #DCDCDC;
@@ -6,7 +8,10 @@ background-color: #DCDCDC;
 
 
 
-.wrapper { padding: 30px 25px; }
+.wrapper {
+  padding: 30px 25px;
+ }
+
 
 .title {
   color: black;
@@ -140,24 +145,14 @@ header{
 
 #previous {
   position: absolute;
-  left: 20px;
-  top: 200px;
+  left: 320px;
+  top: 340px;
   cursor: pointer;
-  transition: .4s;
  }
 
   #next {
   position: absolute;
-  right: 20px;
-  top: 200px;
+  right: 320px;
+  top: 340px;
   cursor: pointer;
-  transition: .4s;
- }
-
-#close {
-   position: absolute;
-   top: 0;
-   right: 30px;
-   cursor: pointer;
-   transition: .4s;
  }
