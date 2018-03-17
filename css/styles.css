@@ -107,7 +107,7 @@ header{
 
 .username { display: none; }
 
-/* MODAL WINDOW */
+/* OVERLAY */
 
 .overlay {
   position: absolute;
@@ -145,14 +145,14 @@ header{
 
 #previous {
   position: absolute;
-  left: 320px;
+  left: 370px;
   top: 340px;
   cursor: pointer;
  }
 
   #next {
   position: absolute;
-  right: 320px;
+  right: 370px;
   top: 340px;
   cursor: pointer;
  }
