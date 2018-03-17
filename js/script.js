@@ -1,5 +1,5 @@
 
-//still working on it
+
 !function () {
   //sending the ajax request and displaying 12 employees on the page with the data provided from the api
   $.ajax({
@@ -15,6 +15,7 @@
         $('#'+(i)+' .email').html(employeeData.email);
         //displaying the city with 1st letter capitalized
         $('#'+(i)+' .city').html(employeeData.location.city.substring(0,1).toUpperCase() + employeeData.location.city.substring(1));
+        $('#'+(i)+' .username').html(employeeData.login.username);
 
       }
       $('li').click(function(event) {
@@ -22,7 +23,7 @@
         $('.wrapper').css('filter','blur(4px)')
                      .css(' webkit-filter','blur(4px)');
 
-
+// creating the overlay
         const $overlay = $(`
           <div class="overlay">
             <div class="lightbox">
@@ -85,4 +86,36 @@
       });//end click
     }//end success
   });//end ajax
+
+  const $notFound = $('<h2>Employee not found...</h2>');
+
+//creating a function to carry the search requests
+  function searchList(){
+    const $searchValue = $('input').val();
+    let matchedEmployees = [];//array to hold the search results
+    $('li').hide();
+    $notFound.remove();
+    $('li').each(function(){
+// checks if any employee is found
+      if ($(this).text().includes($searchValue.toLowerCase())) {
+         matchedEmployees.push(this);
+       }
+     });
+
+     if (matchedEmployees.length == 0) {
+       $('.wrapper').append($notFound);
+
+     } else{
+       matchedEmployees.forEach(function(item){
+         item.style.display = '';//displaying the found employees
+         })//end forEach
+     }
+
+  }//end searchList
+
+//event listener for the search button
+$('#search').click(function(){
+  searchList();
+});//end search click
+
 }();
